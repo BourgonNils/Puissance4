@@ -14,19 +14,48 @@ public class Chaine {
             return 0;
         }
         else {
-            return 3;
+            int cpt = 0;
+            for (Coord c : this.chaine.keySet()){
+                if (!this.chaine.get(c)){
+                    cpt ++;
+                }else{
+                    if (hasVoisin(c)){
+                        cpt += 6;
+                    }
+                    else{
+                        cpt += 3;
+                    }
+                }
+            }
+            //chaque case vide = 1
+            //chaque jeton = 3
+            // chaque jeton 'aligné' = 6
+            return cpt;
         }
     }
-    
+
+    private boolean hasVoisin(Coord c) {
+        return(
+                (this.chaine.containsKey(new Coord(c.getX() +1 ,c.getY()+1))    && this.chaine.get(new Coord(c.getX()+1,c.getY()+1 ))) ||
+                (this.chaine.containsKey(new Coord(c.getX() +1 ,c.getY()))         && this.chaine.get(new Coord(c.getX()+1,c.getY() )))||
+                (this.chaine.containsKey(new Coord(c.getX() +1 ,c.getY()-1))    && this.chaine.get(new Coord(c.getX()+1,c.getY()-1 )))||
+                (this.chaine.containsKey(new Coord(c.getX() ,c.getY() -1))         && this.chaine.get(new Coord(c.getX(),c.getY()-1 )))||
+                (this.chaine.containsKey(new Coord(c.getX() -1 ,c.getY()-1))    && this.chaine.get(new Coord(c.getX()-1,c.getY()-1 )))||
+                (this.chaine.containsKey(new Coord(c.getX() -1 ,c.getY()))         && this.chaine.get(new Coord(c.getX()-1,c.getY() )))||
+                (this.chaine.containsKey(new Coord(c.getX() -1 ,c.getY()+1))    && this.chaine.get(new Coord(c.getX()-1,c.getY()+1 )))||
+                (this.chaine.containsKey(new Coord(c.getX() ,c.getY()+1))          && this.chaine.get(new Coord(c.getX(),c.getY()+1)))
+        );
+    }
+
     @Override
     public String toString() {
     	String ret = "";
     	for (Coord c : this.chaine.keySet()) {
-    		ret+= c.toString() + " "+this.chaine.get(c)+ "\n";
+    		ret += c.toString() + " "+this.chaine.get(c)+ "\n";
     	}
     	return ret;
     }
-    
+
     @Override
     public int hashCode() {
     	int ret=0;
@@ -35,7 +64,7 @@ public class Chaine {
     	}
     	return ret;
     }
-    
+
     @Override
     public boolean equals (Object c){
         Chaine chaine = (Chaine)c;
@@ -51,5 +80,6 @@ public class Chaine {
         }
         return true;
     }
-    
+
+
 }
