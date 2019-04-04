@@ -18,7 +18,21 @@ public class Grille {
 	}
 	
 	public Grille(Grille gr){
-		this.pions = gr.pions;
+		this.pions = new HashMap<>(gr.pions);
+	}
+
+	public void jouerCoup (int col){
+		if (col > 6){
+			return;
+		}
+		else{
+			for (int i = 5 ; i >= 0 ; i--){ // on essaye de jouer le plus en bas possible #gravité
+				if(!this.pions.containsKey(new Coord(col , i))){
+					this.addPion(new Coord(col , i) , 'O');
+					return;
+				}
+			}
+		}
 	}
 	
 	public void addPion(Coord c,Character p){
@@ -40,6 +54,10 @@ public class Grille {
 			}
 		}
 		return ret;
+	}
+
+	public boolean canPlay(int col){
+		return !this.pions.containsKey(new Coord(col,0));
 	}
 
 	public String toString(){

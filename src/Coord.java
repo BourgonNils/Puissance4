@@ -5,7 +5,7 @@ public class Coord{
 	private int y;
 	
 	public Coord( int x, int y){
-		if(x > 7 || y > 6){
+		if(x > 6 || y > 5){
 			throw new IllegalArgumentException();
 		}
 		this.x = x;
@@ -36,7 +36,17 @@ public class Coord{
 	public String toString(){
 		return ("("+this.x+","+this.y+")");
 	}
-	
+
+	@Override
+	public boolean equals(Object c){
+		return this.x == ((Coord)c).x && this.y == ((Coord)c).y ;
+	}
+
+	@Override
+	public int hashCode (){
+		return this.x*1000+this.y;
+	}
+
 	public static boolean estLigne(ArrayList<Coord> coords){
 		for(Coord coord : coords){
 

@@ -1,8 +1,15 @@
 public class main {
     public static void main(String[] args) {
         Grille g = new Grille();
-        g.addPion(new Coord(4,5) , 'O');
-        g.addPion(new Coord(2,5) , 'X');
+        g.jouerCoup(0);
+        g.jouerCoup(0);
+        g.jouerCoup(2);
+        g.jouerCoup(2);
+        g.jouerCoup(2);
+        g.jouerCoup(2);
+        g.jouerCoup(2);
+        g.jouerCoup(2);
+        System.out.println(g.canPlay(1));
         System.out.println(g);
     }
 }
