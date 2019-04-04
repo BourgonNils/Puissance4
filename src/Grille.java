@@ -25,15 +25,15 @@ public class Grille {
 		this.pions.put(c,p);
 	}
 	//Need to raise exception if wrong char
-	public static Grille readGrille(File path) throws IOException {
+	public static Grille fileToGrille(File path) throws IOException {
 		Character[] charPossibles = {opponent, ally, emptyCell};
 		Grille ret = new Grille();
 		BufferedReader br = new BufferedReader(new FileReader(path));
 		String line;
-		for (int x = 0; x < 6; x++) {
+		for (int y = 0; y < 6; y++) {
 			line = br.readLine();
-			for (int y = 0; y < 7; y++) {
-				Character current = line.charAt(y);
+			for (int x = 0; x < 7; x++) {
+				Character current = line.charAt(x);
 				if (current == opponent || current == ally) {
 					ret.addPion(new Coord(x, y), current);
 				}
