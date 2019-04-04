@@ -3,7 +3,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class Grille {
 	
@@ -80,8 +82,55 @@ public class Grille {
 		return result;
 	}
 	
-//	public int eval(Pions types){
-//
+//	public int eval(){
+//		for(int x =0; x<7; x++) {
+//			
+//		}
 //	}
+	
+	public HashSet<Chaine> getAllmyChaines(){
+		HashSet<Chaine> ret = new HashSet<Chaine>();
+		for(int x = 0; x<7; x++) {
+			for(int y = 0; y<6; y++) {
+				if(this.pions.get(new Coord(x,y))== ally) {
+					ret.add(this.getChainesforMyCoord(new Coord(x,y), 1,1));
+					ret.add(this.getChainesforMyCoord(new Coord(x,y), 0,1));
+					ret.add(this.getChainesforMyCoord(new Coord(x,y), 1,0));
+					ret.add(this.getChainesforMyCoord(new Coord(x,y), 1,-1));
+				}
+			}
+			
+		}
+		return ret;
+	}
+	public Chaine getChainesforMyCoord(Coord coord , int horizontal , int vertical){
+		Chaine ret = new Chaine();
+		ret.addCoord(coord, true);
+
+		int[] signes = {1,-1};
+		for(int signe :  signes) {
+			int x = coord.getX();
+			int y = coord.getY();
+			
+			while(true) {
+				
+				x+=horizontal*signe;
+				y+=vertical*signe;
+				if(!(x < 7 && x >= 0 && y >= 0 && y < 6)) {
+					break;
+				}
+
+				Character contenuCoord =this.pions.get(new Coord(x,y));
+				if (contenuCoord== ally ||contenuCoord == null){
+					ret.addCoord(new Coord(x, y), contenuCoord!= null);
+				}else {
+					break;
+				}
+				
+			}
+		}
+		return ret;
+	}
+	
 
 }
