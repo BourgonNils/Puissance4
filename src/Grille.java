@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import jdk.nashorn.internal.runtime.Undefined;
+
 public class Grille {
 	
 	static public final Character opponent ='X';
@@ -82,11 +84,39 @@ public class Grille {
 		return result;
 	}
 	
-//	public int eval(){
-//		for(int x =0; x<7; x++) {
-//			
-//		}
-//	}
+	public int coupOPti() {
+		HashMap<Integer,Integer> evalByColumn = new HashMap<>();
+		for (int column =0;column<7; column++) {
+			if (this.canPlay(column)) {
+				Grille copy = new Grille(this);
+				copy.jouerCoup(column);
+				evalByColumn.put(column, copy.eval());
+			}
+		}
+		//On recupère la colonne avec la plus grande eval
+		//MAUVAIS CODE si les coups valent moins que 0 on ne changera jamais la valeur de retMax
+		int colMax = -1;
+		int retMax =0;
+		int eval;
+		for(Integer col : evalByColumn.keySet()) {
+			eval =evalByColumn.get(col);
+			if (eval > retMax) {
+				colMax =col;
+				retMax = eval;
+			}
+		}
+		
+		return colMax;
+	}
+	
+	//A REVOIR
+	public int eval(){
+		int ret = 50;
+		for(Chaine c : this.getAllmyChaines()) {
+			ret+=c.eval();
+		}
+		return ret;
+	}
 	
 	public HashSet<Chaine> getAllmyChaines(){
 		HashSet<Chaine> ret = new HashSet<Chaine>();
@@ -113,7 +143,6 @@ public class Grille {
 			int y = coord.getY();
 			
 			while(true) {
-				
 				x+=horizontal*signe;
 				y+=vertical*signe;
 				if(!(x < 7 && x >= 0 && y >= 0 && y < 6)) {

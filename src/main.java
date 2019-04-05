@@ -1,11 +1,12 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 
 public class main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Grille g = new Grille();
-        g.jouerCoup(0);
-        g.jouerCoup(0);
+		Grille gr =Grille.fileToGrille(new File("/home/etu/Documents/P4/P4/Puissance4/src/testGrille.txt"));
         for(Chaine c : g.getAllmyChaines()){
             System.out.println(c.eval());
             System.out.println(c);
