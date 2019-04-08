@@ -7,7 +7,10 @@ public class main {
         g.jouerCoup(0);
         g.jouerCoup(0);
         for(Chaine c : g.getAllmyChaines()){
+            System.out.println("Point");
             System.out.println(c.eval());
+
+            System.out.println("Chaine");
             System.out.println(c);
 
         }
