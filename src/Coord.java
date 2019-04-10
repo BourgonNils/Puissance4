@@ -5,9 +5,9 @@ public class Coord{
 	private int y;
 	
 	public Coord( int x, int y){
-		if(x > 6 || y > 5){
-			throw new IllegalArgumentException();
-		}
+//		if(x > 6 || y > 5){
+//			throw new IllegalArgumentException();
+//		}
 		this.x = x;
 		this.y = y;
 	}
