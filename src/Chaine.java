@@ -2,7 +2,7 @@ import java.util.HashMap;
 
 public class Chaine {
     private HashMap<Coord , Boolean> chaine;
-
+    
     public Chaine(){
         this.chaine = new HashMap<>();
     }
