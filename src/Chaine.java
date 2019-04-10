@@ -26,7 +26,7 @@ public class Chaine {
                         cpt += 6;
                     }
                     if (nbVoisins == 2) {
-                        cpt += 9;
+                        cpt += 25;
                     }
                     if (nbVoisins == 0){
                         cpt += 3;
@@ -45,10 +45,6 @@ public class Chaine {
         int[][] coord = {{1, 1}, {1, 0}, {1, -1}, {0, -1}, {-1, -1}, {-1, 0}, {-1, +1}, {0, +1}};
         for (int[] i : coord) {
             if (this.chaine.containsKey(new Coord(c.getX() + i[0], c.getY() + i[1])) && this.chaine.get(new Coord(c.getX() + i[0], c.getY() + i[1]))) {
-                System.out.println("La coord");
-                System.out.println(c);
-                System.out.println("A pour voisin");
-                System.out.println(new Coord(c.getX() + i[0], c.getY() + i[1]));
                 res++;
             }
         }

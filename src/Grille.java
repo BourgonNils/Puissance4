@@ -135,7 +135,7 @@ public class Grille {
 		}
 		Grille inv = this.getReverse();
 		for(Chaine c : inv.getAllmyChaines()) {
-			ret-=c.eval();
+			ret-=c.eval()*0.8;
 		}
 		return ret;
 	}
