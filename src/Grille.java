@@ -30,7 +30,7 @@ public class Grille {
 			return;
 		}
 		else{
-			for (int i = 5 ; i >= 0 ; i--){ // on essaye de jouer le plus en bas possible #gravité
+			for (int i = 5 ; i >= 0 ; i--){ 
 				if(!this.pions.containsKey(new Coord(col , i))){
 					this.addPion(new Coord(col , i) , 'O');
 					return;
@@ -39,7 +39,7 @@ public class Grille {
 		}
 	}
 	
-	public void addPion(Coord c,Character p){
+	private void addPion(Coord c,Character p){
 		this.pions.put(c,p);
 	}
 	//Need to raise exception if wrong char
@@ -84,15 +84,13 @@ public class Grille {
 		}
 		return result;
 	}
+	
 	public int coupOptiv2() {
 		int max = Integer.MIN_VALUE;
 		int meilleur = -1;
-		for (int column =0;column<7; column++) {
+		for (int column =0; column<7; column++) {
 			if (this.canPlay(column)) {
-				
-
 				int val = minMax(1,new Grille(this), column);
-
 				if(max < val) {
 					max = val;
 					meilleur = column;
@@ -103,7 +101,8 @@ public class Grille {
 		return meilleur;
 		
 	}
-	public static int minMax(int prof,Grille grille,int coup ) {
+	public static int minMax(int prof,Grille gr,int coup ) {
+		Grille grille = new Grille(gr);
 		grille.jouerCoup(coup);
 		if(prof == grille.PROFONDEUR_MAX) {
 			return grille.eval();
